@@ -14,6 +14,8 @@
 #include "fnv_hash.hpp"
 #include "imgui/imgui.h"
 
+#pragma execution_character_set("utf-8")
+
 inline static void footer() noexcept
 {
 	using namespace std::string_literals;
