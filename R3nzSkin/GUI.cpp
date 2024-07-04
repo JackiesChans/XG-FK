@@ -22,7 +22,7 @@ inline static void footer() noexcept
 	static const auto buildText{ "Last Build: "s + __DATE__ + " - " + __TIME__ };
 	ImGui::Separator();
 	ImGui::textUnformattedCentered(buildText.c_str());
-	ImGui::textUnformattedCentered("Copyright (C) 2021-2024 R3nzTheCodeGOD");
+	ImGui::textUnformattedCentered("感谢原作者 2021-2024 R3nzTheCodeGOD");
 }
 
 static void changeTurretSkin(const std::int32_t skinId, const std::int32_t team) noexcept
@@ -91,11 +91,11 @@ void GUI::render() noexcept
 		ImGui::rainbowText();
 		if (ImGui::BeginTabBar("TabBar", ImGuiTabBarFlags_Reorderable | ImGuiTabBarFlags_FittingPolicyScroll | ImGuiTabBarFlags_NoTooltip)) {
 			if (player) {
-				if (ImGui::BeginTabItem("Local Player")) {
+				if (ImGui::BeginTabItem("皮肤选项")) {
 					auto& values{ cheatManager.database->champions_skins[fnv::hash_runtime(player->get_character_data_stack()->base_skin.model.str)] };
-					ImGui::Text("Player Skins Settings:");
+					ImGui::Text("换肤设置");
 
-					if (ImGui::Combo("Current Skin", &cheatManager.config->current_combo_skin_index, vector_getter_skin, static_cast<void*>(&values), values.size() + 1))
+					if (ImGui::Combo("英雄皮肤", &cheatManager.config->current_combo_skin_index, vector_getter_skin, static_cast<void*>(&values), values.size() + 1))
 						if (cheatManager.config->current_combo_skin_index > 0)
 							player->change_skin(values[cheatManager.config->current_combo_skin_index - 1].model_name, values[cheatManager.config->current_combo_skin_index - 1].skin_id);
 
@@ -110,14 +110,14 @@ void GUI::render() noexcept
 						const auto stack{ player->get_character_data_stack() };
 						gear = stack->base_skin.gear;
 
-						if (ImGui::Combo("Current Gear", &gear, vector_getter_gear, static_cast<void*>(&it->gears), it->gears.size())) {
+						if (ImGui::Combo("形态选择", &gear, vector_getter_gear, static_cast<void*>(&it->gears), it->gears.size())) {
 							player->get_character_data_stack()->base_skin.gear = static_cast<std::int8_t>(gear);
 							player->get_character_data_stack()->update(true);
 						}
 						ImGui::Separator();
 					}
 
-					if (ImGui::Combo("Current Ward Skin", &cheatManager.config->current_combo_ward_index, vector_getter_ward_skin, static_cast<void*>(&cheatManager.database->wards_skins), cheatManager.database->wards_skins.size() + 1))
+					if (ImGui::Combo("守卫眼皮肤", &cheatManager.config->current_combo_ward_index, vector_getter_ward_skin, static_cast<void*>(&cheatManager.database->wards_skins), cheatManager.database->wards_skins.size() + 1))
 						cheatManager.config->current_ward_skin_index = cheatManager.config->current_combo_ward_index == 0 ? -1 : cheatManager.database->wards_skins.at(cheatManager.config->current_combo_ward_index - 1).first;
 					footer();
 					ImGui::EndTabItem();
@@ -125,19 +125,19 @@ void GUI::render() noexcept
 			}
 
 			static std::int32_t temp_heroes_length = heroes->length;
-			if (ImGui::BeginTabItem("Extras")) {
-				ImGui::hotkey("Menu Key", cheatManager.config->menuKey);
-				ImGui::Checkbox("Quick Skin Change", &cheatManager.config->quickSkinChange);
+			if (ImGui::BeginTabItem("其他设置")) {
+				ImGui::hotkey("呼出键", cheatManager.config->menuKey);
+				ImGui::Checkbox("快捷键换肤", &cheatManager.config->quickSkinChange);
 				ImGui::hoverInfo("It allows you to change skin without opening the menu with the key you assign from the keyboard.");
 
 				if (cheatManager.config->quickSkinChange) {
 					ImGui::Separator();
-					ImGui::hotkey("Previous Skin Key", cheatManager.config->previousSkinKey);
-					ImGui::hotkey("Next Skin Key", cheatManager.config->nextSkinKey);
+					ImGui::hotkey("上一个皮肤", cheatManager.config->previousSkinKey);
+					ImGui::hotkey("下一个皮肤", cheatManager.config->nextSkinKey);
 					ImGui::Separator();
 				}
 
-				ImGui::SliderFloat("Font Scale", &cheatManager.config->fontScale, 1.0f, 2.0f, "%.3f");
+				ImGui::SliderFloat("程序界面大小", &cheatManager.config->fontScale, 1.0f, 2.0f, "%.3f");
 				if (ImGui::GetIO().FontGlobalScale != cheatManager.config->fontScale) {
 					ImGui::GetIO().FontGlobalScale = cheatManager.config->fontScale;
 				} ImGui::hoverInfo("Changes the menu font scale.");
