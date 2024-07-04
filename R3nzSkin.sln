@@ -5,8 +5,6 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "R3nzSkin", "R3nzSkin\R3nzSkin.vcxproj", "{17B6E7A6-AA76-4C09-B2AA-E2055EF748D2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "R3nzSkin_Injector", "R3nzSkin_Injector\R3nzSkin_Injector.vcxproj", "{40F6875E-C1E5-4C10-A129-6E84CE034801}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1C9DAFE-154E-443E-9E7E-DAC46C839AAB}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
