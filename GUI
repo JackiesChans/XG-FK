@@ -88,6 +88,10 @@ void GUI::render() noexcept
 
 	ImGui::StyleColorsDark();	//设置界面风格（1.ImGui::StyleColorsDark(); 2.//ImGui::StyleColorsLight();  3.//ImGui::StyleColorsClassic();）
 
+	ImGuiStyle& style = ImGui::GetStyle(); // 获取当前的ImGui样式
+
+	style.Alpha = 0.7f; // 修改窗口背景色的alpha值为0.7（70%透明度）
+
 	ImGui::Begin("R3nzSkin", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_AlwaysAutoResize);
 	{
 		ImGui::rainbowText();
