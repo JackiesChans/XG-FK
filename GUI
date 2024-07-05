@@ -14,15 +14,15 @@
 #include "fnv_hash.hpp"
 #include "imgui/imgui.h"
 
-#pragma execution_character_set("utf-8")
+#pragma execution_character_set("utf-8") //è®¾ç½®ä¸­æ–‡å­—ä½“
 
 inline static void footer() noexcept
 {
 	using namespace std::string_literals;
-	static const auto buildText{ "±àÒëÊ±¼ä: "s + __DATE__ + " - " + __TIME__ };
+	static const auto buildText{ "ç¼–è¯‘æ—¶é—´: "s + __DATE__ + " - " + __TIME__ };
 	ImGui::Separator();
 	ImGui::textUnformattedCentered(buildText.c_str());
-	ImGui::textUnformattedCentered("¸ĞĞ»Ô­×÷Õß (C) 2021-2024 R3nzTheCodeGOD");
+	ImGui::textUnformattedCentered("æ„Ÿè°¢åŸä½œè€… (C) 2021-2024 R3nzTheCodeGOD");
 }
 
 static void changeTurretSkin(const std::int32_t skinId, const std::int32_t team) noexcept
@@ -86,16 +86,18 @@ void GUI::render() noexcept
 		return true;
 	};
 
+	ImGui::StyleColorsDark();	//è®¾ç½®ç•Œé¢é£æ ¼ï¼ˆ1.ImGui::StyleColorsDark(); 2.//ImGui::StyleColorsLight();  3.//ImGui::StyleColorsClassic();ï¼‰
+
 	ImGui::Begin("R3nzSkin", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_AlwaysAutoResize);
 	{
 		ImGui::rainbowText();
 		if (ImGui::BeginTabBar("TabBar", ImGuiTabBarFlags_Reorderable | ImGuiTabBarFlags_FittingPolicyScroll | ImGuiTabBarFlags_NoTooltip)) {
 			if (player) {
-				if (ImGui::BeginTabItem("Æ¤·ôÉèÖÃ")) {
+				if (ImGui::BeginTabItem("çš®è‚¤è®¾ç½®")) {
 					auto& values{ cheatManager.database->champions_skins[fnv::hash_runtime(player->get_character_data_stack()->base_skin.model.str)] };
-					ImGui::Text("Ñ¡Ïî:");
+					ImGui::Text("é€‰é¡¹:");
 
-					if (ImGui::Combo("Ó¢ĞÛ", &cheatManager.config->current_combo_skin_index, vector_getter_skin, static_cast<void*>(&values), values.size() + 1))
+					if (ImGui::Combo("è‹±é›„", &cheatManager.config->current_combo_skin_index, vector_getter_skin, static_cast<void*>(&values), values.size() + 1))
 						if (cheatManager.config->current_combo_skin_index > 0)
 							player->change_skin(values[cheatManager.config->current_combo_skin_index - 1].model_name, values[cheatManager.config->current_combo_skin_index - 1].skin_id);
 
@@ -110,33 +112,33 @@ void GUI::render() noexcept
 						const auto stack{ player->get_character_data_stack() };
 						gear = stack->base_skin.gear;
 
-						if (ImGui::Combo("ĞÎÌ¬", &gear, vector_getter_gear, static_cast<void*>(&it->gears), it->gears.size())) {
+						if (ImGui::Combo("å½¢æ€", &gear, vector_getter_gear, static_cast<void*>(&it->gears), it->gears.size())) {
 							player->get_character_data_stack()->base_skin.gear = static_cast<std::int8_t>(gear);
 							player->get_character_data_stack()->update(true);
 						}
 						ImGui::Separator();
 					}
 
-					if (ImGui::Combo("ÊØÎÀÑÛ", &cheatManager.config->current_combo_ward_index, vector_getter_ward_skin, static_cast<void*>(&cheatManager.database->wards_skins), cheatManager.database->wards_skins.size() + 1))
+					if (ImGui::Combo("å®ˆå«çœ¼", &cheatManager.config->current_combo_ward_index, vector_getter_ward_skin, static_cast<void*>(&cheatManager.database->wards_skins), cheatManager.database->wards_skins.size() + 1))
 						cheatManager.config->current_ward_skin_index = cheatManager.config->current_combo_ward_index == 0 ? -1 : cheatManager.database->wards_skins.at(cheatManager.config->current_combo_ward_index - 1).first;
 					footer();
 					ImGui::EndTabItem();
 				}
 			}
 
-			if (ImGui::BeginTabItem("ÆäËüÉè¶¨")) {
-				ImGui::hotkey("¼üÅÌºô³ö°´Å¥", cheatManager.config->menuKey);
-				ImGui::Checkbox("¼üÅÌ¿ì½İ¼ü»»·ô", &cheatManager.config->quickSkinChange);
+			if (ImGui::BeginTabItem("å…¶å®ƒè®¾å®š")) {
+				ImGui::hotkey("é”®ç›˜å‘¼å‡ºæŒ‰é’®", cheatManager.config->menuKey);
+				ImGui::Checkbox("é”®ç›˜å¿«æ·é”®æ¢è‚¤", &cheatManager.config->quickSkinChange);
 				ImGui::hoverInfo("It allows you to change skin without opening the menu with the key you assign from the keyboard.");
 
 				if (cheatManager.config->quickSkinChange) {
 					ImGui::Separator();
-					ImGui::hotkey("ÇĞ»»ÉÏÒ»¸öÆ¤·ô", cheatManager.config->previousSkinKey);
-					ImGui::hotkey("ÇĞ»»ÏÂÒ»¸öÆ¤·ô", cheatManager.config->nextSkinKey);
+					ImGui::hotkey("åˆ‡æ¢ä¸Šä¸€ä¸ªçš®è‚¤", cheatManager.config->previousSkinKey);
+					ImGui::hotkey("åˆ‡æ¢ä¸‹ä¸€ä¸ªçš®è‚¤", cheatManager.config->nextSkinKey);
 					ImGui::Separator();
 				}
 
-				ImGui::SliderFloat("³ÌĞò½çÃæËõ·Å", &cheatManager.config->fontScale, 1.0f, 2.0f, "%.3f");
+				ImGui::SliderFloat("ç¨‹åºç•Œé¢ç¼©æ”¾", &cheatManager.config->fontScale, 1.0f, 2.0f, "%.3f");
 				if (ImGui::GetIO().FontGlobalScale != cheatManager.config->fontScale) {
 					ImGui::GetIO().FontGlobalScale = cheatManager.config->fontScale;
 				} ImGui::hoverInfo("Changes the menu font scale.");
