@@ -142,6 +142,8 @@ void GUI::render() noexcept
 				if (ImGui::GetIO().FontGlobalScale != cheatManager.config->fontScale) {
 					ImGui::GetIO().FontGlobalScale = cheatManager.config->fontScale;
 				} ImGui::hoverInfo("Changes the menu font scale.");
+
+				ImGui::Text("FPS: %.0f FPS", ImGui::GetIO().Framerate);
 				footer();
 	}
 	ImGui::End();
