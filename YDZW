@@ -1,0 +1,4 @@
+Hooks.cpp第171行
+			cfg.SizePixels = 15.0f;
+			io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 15.0f, nullptr,
+				io.Fonts->GetGlyphRangesChineseFull());
