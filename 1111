@@ -16,7 +16,7 @@
 { "PetChibiGwen",		"迷你格温",			std::make_pair(1, 2)},
 { "PetChibiIrelia",		"迷你艾瑞莉娅",			std::make_pair(1, 2)},
 { "PetChibiJinx",		"迷你金克丝",			std::make_pair(1, 2)},
-{ "PetChibiKaisa",		"迷你凯莎",			std::make_pair(1, 3)},
+{ "PetChibiKaisa",		"迷你卡莎",			std::make_pair(1, 3)},
 { "PetChibiLeeSin",		"迷你李青",			std::make_pair(1, 3)},
 { "PetChibiLux",		"迷你拉克丝",			std::make_pair(1, 3)},
 { "PetChibiMalphite",		"迷你玛尔扎哈",			std::make_pair(1, 2)},
