@@ -6,7 +6,7 @@
 { "PetBigKnifeDog",		"大刀狗",				std::make_pair(1, 18)},
 { "PetBuglet",			"小虫",				std::make_pair(1, 22)},
 { "PetBunny",			"小兔子",				std::make_pair(1, 33)},
-{ "PetChibiAatrox",		"迷你阿托克斯",			std::make_pair(1, 2) },
+{ "PetChibiAatrox",		"迷你亚托克斯",			std::make_pair(1, 2) },
 { "PetChibiAhri",		"迷你阿狸",			std::make_pair(1, 3)},
 { "PetChibiAkali",		"迷你阿卡丽",			std::make_pair(1, 2)},
 { "PetChibiAnnie",		"迷你安妮",			std::make_pair(1, 2)},
