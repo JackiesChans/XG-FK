@@ -75,5 +75,6 @@
 { "PetTurtle",			"海龟",			std::make_pair(1, 33)},
 { "PetUmbra",			"乌姆布拉",			std::make_pair(1, 57)},
 { "PetVoidEye",			"虚空之眼",			std::make_pair(1, 18)} ,
+{ "PetChibiMalphite",			"迷你墨菲特",			std::make_pair(1, 2)} ,
 //Other models
 { "TFT_ElderDragon",	        "远古巨龙"	
