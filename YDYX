@@ -95,10 +95,8 @@ public:
 { "PetTurtle",			"桨翼",			std::make_pair(1, 33)},
 { "PetUmbra",			"笨戈",			std::make_pair(1, 57)},
 { "PetVoidEye",			"猫克塞",			std::make_pair(1, 18)} ,
-{ "PetNightFury",			"夜煞",			std::make_pair(1, 57)} ,
+{ "PetUmbra",			"夜煞",			std::make_pair(1, 57)} ,
 //Other models
 	{ "TFT_ElderDragon",	        "远古巨龙"							 },
-	{ "TFT_Gromp",	        "蛤蟆1"							 },
-	{ "PetGromp",	        "蛤蟆" ,			std::make_pair(1, 57)}
 	};
 };
