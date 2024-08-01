@@ -19,6 +19,8 @@ inline void footer() noexcept
 {
 	ImGui::Separator();
 	ImGui::textUnformattedCentered((std::string("Last Update: ") + __DATE__ + " - " + __TIME__).c_str());
+	ImGui::textUnformattedCentered(buildText.c_str());
+	ImGui::textUnformattedCentered("本软件完全免费，请勿上当受骗花钱购买");
 }
 
 void GUI::render() noexcept
