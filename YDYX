@@ -18,14 +18,14 @@ public:
 
 	// PetModelName, PetName, PetSkinCount(manual update)
 	std::vector<PetsInfo> pets{
-		{ "PetAkaliDragon",		"奥希雅",			std::make_pair(1, 21)},
+{ "PetAkaliDragon",		"奥希雅",			std::make_pair(1, 21)},
 { "PetAoShin",			"敖兴",				std::make_pair(1, 51)},
 { "PetBallDragon",		"啵啵龙",				std::make_pair(1, 21)},
-{ "PetBaron",			"小小男爵",				std::make_pair(1, 6)}, // wtf riot
+{ "PetBaron",			"小小男爵",				std::make_pair(1, 6)},  wtf riot
 { "PetBellSwayer",		"铃角",				std::make_pair(1, 23)},
 { "PetBigKnifeDog",		"利刃冥犬",				std::make_pair(1, 18)},
 { "PetBuglet",			"嗡嗡虫",				std::make_pair(1, 22)},
-{ "PetBunny",			"兔兔",				std::make_pair(1, 33)},
+{ "PetBunny",			"兔兔",				std::make_pair(1, 48)},
 { "PetChibiAatrox",		"迷你亚托克斯",			std::make_pair(1, 2) },
 { "PetChibiAhri",		"迷你阿狸",			std::make_pair(1, 3)},
 { "PetChibiAkali",		"迷你阿卡丽",			std::make_pair(1, 2)},
@@ -33,7 +33,7 @@ public:
 { "PetChibiAshe",		"迷你艾希",			std::make_pair(1, 2)},
 { "PetChibiEkko",		"迷你艾克",			std::make_pair(1, 1)},
 { "PetChibiEzreal",		"迷你伊泽瑞尔",			std::make_pair(1, 2)},
-{ "PetChibiGwen",		"迷你格温",			std::make_pair(1, 2)},
+{ "PetChibiGwen",		"迷你格温",			std::make_pair(1, 3)},
 { "PetChibiIrelia",		"迷你艾瑞莉娅",			std::make_pair(1, 2)},
 { "PetChibiJinx",		"迷你金克丝",			std::make_pair(1, 2)},
 { "PetChibiKaisa",		"迷你卡莎",			std::make_pair(1, 3)},
@@ -48,10 +48,10 @@ public:
 { "PetChibiVi",			"迷你蔚",			std::make_pair(1, 1)},
 { "PetChibiYasuo",		"迷你亚索",			std::make_pair(1, 3)},
 { "PetChibiYone",		"迷你永恩",			std::make_pair(1, 2)},
-{ "PetChibiZed",		"迷你小小劫",			std::make_pair(1, 2)},
+{ "PetChibiZed",		"迷你小小劫",			std::make_pair(1, 3)},
 { "PetChoncc",			"胖胖龙",			std::make_pair(1, 51)},
 { "PetCreepyCat",		"胡子喵",			std::make_pair(1, 21)},
-{ "PetDowsie",			"小美人鱼",			std::make_pair(1, 51)},
+{ "PetDowsie",			"小美人鱼",			std::make_pair(1, 52)},
 { "PetDsSquid",			"宇宙鱿",			std::make_pair(1, 57)},
 { "PetDsSwordGuy",		"菜大师",			std::make_pair(1, 21)},
 { "PetDsWhale",			"星星鲲",			std::make_pair(1, 21)},
@@ -91,11 +91,13 @@ public:
 { "PetShark",			"小鲨鱼",			std::make_pair(1, 18)},
 { "PetSmolKnifeDog",		"利刃犬",			std::make_pair(1, 18)},
 { "PetSpiritFox",		"静尾",			std::make_pair(1, 45)},
-{ "PetTftAvatar",		"小河灵",			std::make_pair(1, 21)},
+{ "PetTftAvatar",		"小河灵",			std::make_pair(1, 22)},
 { "PetTurtle",			"桨翼",			std::make_pair(1, 33)},
 { "PetUmbra",			"笨戈",			std::make_pair(1, 57)},
 { "PetVoidEye",			"猫克塞",			std::make_pair(1, 18)} ,
 { "PetUmbra",			"夜煞",			std::make_pair(1, 57)} ,
+{ "PetLumie",			"鳐鳐",			std::make_pair(1, 5)} ,
+{ "PetChibiMissFortune",			"迷你厄运小姐",			std::make_pair(1, 2)} ,
 //Other models
 	{ "TFT_ElderDragon",	        "远古巨龙"							 },
 	};
