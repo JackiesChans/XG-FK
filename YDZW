@@ -199,6 +199,10 @@ Hooks.cpp第171行
 			cfg.SizePixels = 15.0f;
 			io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 15.0f, nullptr,
 				io.Fonts->GetGlyphRangesChineseFull());
+
+//中文方法2设置
+Hooks.cpp第171行
+io.Fonts->AddFontFromFileTTF((path / "msyh.ttc").string().c_str(), cfg.SizePixels, &cfg, io.Fonts->GetGlyphRangesChineseFull());
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Sakura.rc设置
 
