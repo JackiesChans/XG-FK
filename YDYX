@@ -93,7 +93,6 @@ public:
 { "PetSpiritFox",		"静尾",			std::make_pair(1, 45)},
 { "PetTftAvatar",		"小河灵",			std::make_pair(1, 22)},
 { "PetTurtle",			"桨翼",			std::make_pair(1, 33)},
-{ "PetUmbra",			"笨戈",			std::make_pair(1, 57)},
 { "PetVoidEye",			"猫克塞",			std::make_pair(1, 18)} ,
 { "PetUmbra",			"夜煞",			std::make_pair(1, 57)} ,
 { "PetSeaAngel",			"鳐鳐",			std::make_pair(1, 5)} ,
