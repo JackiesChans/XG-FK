@@ -14,7 +14,7 @@
 #include "fnv_hash.hpp"
 #include "imgui/imgui.h"
 
-#pragma execution_character_set("utf-8") //设置中文字体
+#pragma execution_character_set("utf-8")
 
 inline static void footer() noexcept
 {
@@ -22,7 +22,6 @@ inline static void footer() noexcept
 	static const auto buildText{ "编译时间: "s + __DATE__ + " - " + __TIME__ };
 	ImGui::Separator();
 	ImGui::textUnformattedCentered(buildText.c_str());
-	ImGui::textUnformattedCentered("感谢原作者 (C) 2021-2024 R3nzTheCodeGOD");
 	ImGui::textUnformattedCentered("本软件完全免费，请勿上当受骗花钱购买");
 }
 
@@ -39,8 +38,7 @@ static void changeTurretSkin(const std::int32_t skinId, const std::int32_t team)
 			if (playerTeam == team) {
 				turret->get_character_data_stack()->base_skin.skin = skinId * 2;
 				turret->get_character_data_stack()->update(true);
-			}
-			else {
+			} else {
 				turret->get_character_data_stack()->base_skin.skin = skinId * 2 + 1;
 				turret->get_character_data_stack()->update(true);
 			}
@@ -51,9 +49,9 @@ static void changeTurretSkin(const std::int32_t skinId, const std::int32_t team)
 void GUI::render() noexcept
 {
 	std::call_once(set_font_scale, [&]
-		{
-			ImGui::GetIO().FontGlobalScale = cheatManager.config->fontScale;
-		});
+	{
+		ImGui::GetIO().FontGlobalScale = cheatManager.config->fontScale;
+	});
 
 	const auto player{ cheatManager.memory->localPlayer };
 	const auto heroes{ cheatManager.memory->heroList };
@@ -65,29 +63,28 @@ void GUI::render() noexcept
 		if (idx < 0 || idx > static_cast<std::int32_t>(vector.size())) return false;
 		*out_text = idx == 0 ? "Default" : vector.at(idx - 1).skin_name.c_str();
 		return true;
-		};
+	};
 
 	static const auto vector_getter_ward_skin = [](void* vec, const std::int32_t idx, const char** out_text) noexcept {
 		const auto& vector{ *static_cast<std::vector<std::pair<std::int32_t, const char*>>*>(vec) };
 		if (idx < 0 || idx > static_cast<std::int32_t>(vector.size())) return false;
 		*out_text = idx == 0 ? "Default" : vector.at(idx - 1).second;
 		return true;
-		};
+	};
 
 	static auto vector_getter_gear = [](void* vec, const std::int32_t idx, const char** out_text) noexcept {
 		const auto& vector{ *static_cast<std::vector<const char*>*>(vec) };
 		if (idx < 0 || idx > static_cast<std::int32_t>(vector.size())) return false;
 		*out_text = vector[idx];
 		return true;
-		};
+	};
 
 	static auto vector_getter_default = [](void* vec, const std::int32_t idx, const char** out_text) noexcept {
 		const auto& vector{ *static_cast<std::vector<const char*>*>(vec) };
 		if (idx < 0 || idx > static_cast<std::int32_t>(vector.size())) return false;
 		*out_text = idx == 0 ? "Default" : vector.at(idx - 1);
 		return true;
-		};
-
+	};
 	ImGui::StyleColorsDark();	//设置界面风格（1.ImGui::StyleColorsDark(); 2.//ImGui::StyleColorsLight();  3.//ImGui::StyleColorsClassic();）
 
 	ImGuiStyle& style = ImGui::GetStyle(); // 获取当前的ImGui样式
@@ -96,7 +93,9 @@ void GUI::render() noexcept
 
 	ImGui::Begin("R3nzSkin", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_AlwaysAutoResize);
 	{
+		if (ImGui::BeginTabBar("TabBar", ImGuiTabBarFlags_Reorderable | ImGuiTabBarFlags_FittingPolicyScroll | ImGuiTabBarFlags_NoTooltip)) {
 			if (player) {
+				if (ImGui::BeginTabItem("皮肤设置")) {
 					auto& values{ cheatManager.database->champions_skins[fnv::hash_runtime(player->get_character_data_stack()->base_skin.model.str)] };
 					ImGui::Text("选项:");
 
@@ -125,27 +124,51 @@ void GUI::render() noexcept
 					if (ImGui::Combo("守卫眼", &cheatManager.config->current_combo_ward_index, vector_getter_ward_skin, static_cast<void*>(&cheatManager.database->wards_skins), cheatManager.database->wards_skins.size() + 1))
 						cheatManager.config->current_ward_skin_index = cheatManager.config->current_combo_ward_index == 0 ? -1 : cheatManager.database->wards_skins.at(cheatManager.config->current_combo_ward_index - 1).first;
 					ImGui::EndTabItem();
+
+					ImGui::Separator();
+					ImGui::hotkey("键盘呼出按钮", cheatManager.config->menuKey);
+					ImGui::Checkbox("键盘快捷键换肤", &cheatManager.config->quickSkinChange);
+					ImGui::hoverInfo("It allows you to change skin without opening the menu with the key you assign from the keyboard.");
+
+					if (cheatManager.config->quickSkinChange) {
+						ImGui::hotkey("切换上一个皮肤", cheatManager.config->previousSkinKey);
+						ImGui::hotkey("切换下一个皮肤", cheatManager.config->nextSkinKey);
+					}
+
+					ImGui::Separator();
+					ImGui::SliderFloat("程序界面缩放", &cheatManager.config->fontScale, 1.0f, 2.0f, "%.3f");
+
+					if (ImGui::GetIO().FontGlobalScale != cheatManager.config->fontScale) {
+						ImGui::GetIO().FontGlobalScale = cheatManager.config->fontScale;
+					} ImGui::hoverInfo("Changes the menu font scale.");
+
+					ImGui::Text("FPS: %.0f FPS", ImGui::GetIO().Framerate);
+
+				}
 			}
 
-			    ImGui::Separator();
-				ImGui::hotkey("键盘呼出按钮", cheatManager.config->menuKey);
-				ImGui::Checkbox("键盘快捷键换肤", &cheatManager.config->quickSkinChange);
-				ImGui::hoverInfo("It allows you to change skin without opening the menu with the key you assign from the keyboard.");
+			if (ImGui::BeginTabItem("关于我们")) {
+				ImGui::Text("原作者:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImColor(0, 102, 255, 255), "R3nzTheCodeGOD");
 
-				if (cheatManager.config->quickSkinChange) {
-					ImGui::hotkey("切换上一个皮肤", cheatManager.config->previousSkinKey);
-					ImGui::hotkey("切换下一个皮肤", cheatManager.config->nextSkinKey);
-				}
+				ImGui::Text("续更者:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImColor(0, 102, 255, 255), "好心市民");
+				ImGui::EndTabItem();
 
-				ImGui::Separator();
-				ImGui::SliderFloat("程序界面缩放", &cheatManager.config->fontScale, 1.0f, 2.0f, "%.3f");
+				ImGui::Text("闲唠:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImColor(0, 102, 255, 255), "换皮本就逆天，被封也属正常");
+				ImGui::EndTabItem();
 
-				if (ImGui::GetIO().FontGlobalScale != cheatManager.config->fontScale) {
-					ImGui::GetIO().FontGlobalScale = cheatManager.config->fontScale;
-				} ImGui::hoverInfo("Changes the menu font scale.");
-
-				ImGui::Text("FPS: %.0f FPS", ImGui::GetIO().Framerate);
-				footer();
+				ImGui::Text("       ");
+				ImGui::SameLine();
+				ImGui::TextColored(ImColor(0, 102, 255, 255), "撑死胆大的，饿死胆小的");
+				ImGui::EndTabItem();
+			}
+			footer();
+		}
 	}
 	ImGui::End();
 }
