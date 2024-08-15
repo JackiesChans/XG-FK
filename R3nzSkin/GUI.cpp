@@ -232,6 +232,7 @@ void GUI::render() noexcept
 						if (const auto hero{ heroes->list[i] }; hero != player)
 							hero->change_skin(hero->get_character_data_stack()->base_skin.model.str, 0);
 					}
+					cheatManager.config->save();
 				} ImGui::hoverInfo("Sets the skins of all champions except the local player to the default skin.");
 
 				if (ImGui::Button("Random Skins")) {
@@ -254,6 +255,7 @@ void GUI::render() noexcept
 							data = random(1ull, skinCount);
 							hero->change_skin(skinDatabase[data - 1].model_name, skinDatabase[data - 1].skin_id);
 						}
+						cheatManager.config->save();
 					}
 				} ImGui::hoverInfo("Randomly changes the skin of all champions.");
 
