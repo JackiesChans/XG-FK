@@ -57,12 +57,7 @@ void GUI::render() noexcept
 	const auto heroes{ cheatManager.memory->heroList };
 	static const auto my_team{ player ? player->get_team() : 100 };
 	static int gear{ player ? player->get_character_data_stack()->base_skin.gear : 0 };
-	
-	auto& values{ cheatManager.database->champions_skins[fnv::hash_runtime(player->get_character_data_stack()->base_skin.model.str)] };
-	if (const auto stack{ player->get_character_data_stack() }; stack->base_skin.skin != values[cheatManager.config->current_combo_skin_index - 1].skin_id) {
-		stack->base_skin.skin = values[cheatManager.config->current_combo_skin_index - 1].skin_id;
-		stack->update(true);
-	}
+
 	static const auto vector_getter_skin = [](void* vec, const std::int32_t idx, const char** out_text) noexcept {
 		const auto& vector{ *static_cast<std::vector<SkinDatabase::skin_info>*>(vec) };
 		if (idx < 0 || idx > static_cast<std::int32_t>(vector.size())) return false;
@@ -97,6 +92,7 @@ void GUI::render() noexcept
 		if (ImGui::BeginTabBar("TabBar", ImGuiTabBarFlags_Reorderable | ImGuiTabBarFlags_FittingPolicyScroll | ImGuiTabBarFlags_NoTooltip)) {
 			if (player) {
 				if (ImGui::BeginTabItem("Local Player")) {
+					auto& values{ cheatManager.database->champions_skins[fnv::hash_runtime(player->get_character_data_stack()->base_skin.model.str)] };
 					ImGui::Text("Player Skins Settings:");
 
 					if (ImGui::Combo("Current Skin", &cheatManager.config->current_combo_skin_index, vector_getter_skin, static_cast<void*>(&values), values.size() + 1))
@@ -171,8 +167,10 @@ void GUI::render() noexcept
 
 						auto& values{ cheatManager.database->champions_skins[champion_name_hash] };
 						if (ImGui::Combo(str_buffer, &fst->second, vector_getter_skin, static_cast<void*>(&values), values.size() + 1))
-							if (fst->second > 0)
+							if (fst->second > 0) {
 								hero->change_skin(values[fst->second - 1].model_name, values[fst->second - 1].skin_id);
+								cheatManager.config->save();
+							}
 					}
 					footer();
 					ImGui::EndTabItem();
@@ -234,6 +232,7 @@ void GUI::render() noexcept
 						if (const auto hero{ heroes->list[i] }; hero != player)
 							hero->change_skin(hero->get_character_data_stack()->base_skin.model.str, 0);
 					}
+					cheatManager.config->save();
 				} ImGui::hoverInfo("Sets the skins of all champions except the local player to the default skin.");
 
 				if (ImGui::Button("Random Skins")) {
@@ -256,6 +255,7 @@ void GUI::render() noexcept
 							data = random(1ull, skinCount);
 							hero->change_skin(skinDatabase[data - 1].model_name, skinDatabase[data - 1].skin_id);
 						}
+						cheatManager.config->save();
 					}
 				} ImGui::hoverInfo("Randomly changes the skin of all champions.");
 
