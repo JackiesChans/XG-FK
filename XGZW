@@ -126,7 +126,6 @@ void GUI::render() noexcept
 
 					if (ImGui::Combo("守卫眼", &cheatManager.config->current_combo_ward_index, vector_getter_ward_skin, static_cast<void*>(&cheatManager.database->wards_skins), cheatManager.database->wards_skins.size() + 1))
 						cheatManager.config->current_ward_skin_index = cheatManager.config->current_combo_ward_index == 0 ? -1 : cheatManager.database->wards_skins.at(cheatManager.config->current_combo_ward_index - 1).first;
-					footer();
 					ImGui::EndTabItem();
 					ImGui::Separator();
 					ImGui::hotkey("键盘呼出按钮", cheatManager.config->menuKey);
