@@ -60,7 +60,8 @@ private:
 	{
 		{
 			{
-				"48 8B 3D ? ? ? ? 48 85 FF 74 15 48 81 C7"			}, true, false, true, 0, &offsets::global::Player
+				"48 8B 3D ? ? ? ? 48 85 FF 74 15 48 81 C7"
+			}, true, false, true, 0, &offsets::global::Player
 		},
 		{
 			{
