@@ -110,7 +110,7 @@ private:
 		},
 		{
 			{
-				"88 54 24 10 53 55 56 57 41 54 41 55 41 56 41"
+				"4C 8B DC 53 56 57 48 83 EC ? 49"
 			}, true, false, false, 0, &offsets::functions::CharacterDataStack__Update
 		},
 		{
