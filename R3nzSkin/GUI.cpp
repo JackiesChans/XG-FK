@@ -176,7 +176,6 @@ void GUI::render() noexcept
 					ImGui::EndTabItem();
 				}
 			}
-
 			if (ImGui::BeginTabItem("Global Skins")) {
 				ImGui::Text("Global Skins Settings:");
 				if (ImGui::Combo("Minion Skins:", &cheatManager.config->current_combo_minion_index, vector_getter_default, static_cast<void*>(&cheatManager.database->minions_skins), cheatManager.database->minions_skins.size() + 1))
